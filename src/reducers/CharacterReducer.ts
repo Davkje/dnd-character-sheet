@@ -1,6 +1,6 @@
 import type { Character } from "../models/Character";
 
-type CharacterAction = {
+export type CharacterAction = {
 	type: string;
 	payload: string;
 };
