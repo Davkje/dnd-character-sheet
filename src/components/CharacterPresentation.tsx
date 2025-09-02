@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import type { Character } from "../models/Character";
-import { Button } from "./styled/Buttons";
 import { Div, DivRow } from "./styled/Wrappers";
 
 type CharacterPresentationProps = {
@@ -17,8 +16,7 @@ export const CharacterPresentation = ({ character }: CharacterPresentationProps)
 					<Div>{character.class}</Div>
 					<Div>{character.level}</Div>
 				</DivRow>
-        <Link to={`/character/${character._id}`}>More</Link>
-				<Button>GO TO</Button>
+				<Link to={`/character/${character._id}`}>More</Link>
 			</Div>
 		</>
 	);

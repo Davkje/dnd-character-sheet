@@ -1,10 +1,38 @@
+//CHARACTER MODEL
+
+export type AbilityScores = {
+  strength: number
+  dexterity: number
+  intellect: number
+  wisdom: number
+  charisma: number
+  constitution: number
+}
+
+export type Feature = {
+  name: string
+  description: string
+}
+
+export type Spell = {
+  name: string
+  description: string
+}
+
 export type Character = {
-  _id: string,
-  name: string,
-  race: string,
-  class: string,
-  level: number,
-  armourClass: number,
-  speed: number,
-  hp: number,
+  _id: string
+  name: string
+  class: string
+  race: string
+  level: number
+  hp: number
+  speed: number
+  armourClass: number
+  abilities: AbilityScores
+  proficiencyBonus: number
+  proficientSkills: string[]
+  proficientSavingThrows: string[]
+  items: string[]
+  features: Feature[]
+  spells: Spell[]
 }
