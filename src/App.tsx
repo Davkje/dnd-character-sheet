@@ -1,34 +1,34 @@
-import { Button, ButtonCustom } from "./components/styled/Buttons";
-import { Input, InputText } from "./components/styled/Inputs";
-import { Div, DivRow, Section, SectionRow } from "./components/styled/Wrappers";
 import "./style/App.scss";
+import { useEffect, useReducer } from "react";
+import { Button } from "./components/styled/Buttons";
+import { Div, Section } from "./components/styled/Wrappers";
+import { getCharacters } from "./services/CharacterService";
+import { CharacterReducer } from "./reducers/CharacterReducer";
 
 function App() {
+	const [characters, dispatch] = useReducer(CharacterReducer, []);
+
+	useEffect(() => {
+		const getData = async () => {
+			const fetchedCharacters = await getCharacters();
+			dispatch({
+				type: "LOADED",
+				payload: JSON.stringify(fetchedCharacters),
+			});
+		};
+		if (characters.length > 0) return; // Om vi redan hämtat datan, kör INTE IGEN!
+		getData(); // Om det inte finns data, HÄMTA!
+	});
+
 	return (
 		<>
 			<h1>DND SHEET</h1>
 			<Section>
 				<Div>
-					<div>hej</div>
-					<div>hsdj</div>
-					<div>hej</div>
+					<Button>Button</Button>
+					{characters.length}
 				</Div>
-				<Button>Button</Button>
-				<ButtonCustom bgColor="var(--c-blue)">Custom</ButtonCustom>
-				<Input></Input>
-        <InputText className="denna"></InputText>
-        <DivRow>
-					<div>hej</div>
-					<div>hsdj</div>
-					<div>hej</div>
-				</DivRow>
 			</Section>
-			<SectionRow>
-				<Div>oj</Div>
-				<Div>oj</Div>
-				<Div>oj</Div>
-				<Div>oj</Div>
-			</SectionRow>
 		</>
 	);
 }
