@@ -7,8 +7,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-
-/* Color palette */
+// Color palette
 :root {
   --c-white: #824242;
   --c-white-soft: #e6e6e6;
@@ -22,12 +21,12 @@
   --c-black-trans: rgba(0, 0, 0, 0.3);
   --c-black-gradient: linear-gradient(to bottom, var(--c-black-mute), var(--c-black));
 
-  --c-primary-lighter: rgb(181, 188, 244);
-  --c-primary-light: rgb(154, 163, 241);
-  --c-primary: rgb(90, 101, 204);
-  --c-primary-dark: rgb(45, 56, 154);
-  --c-primary-darker: rgb(25, 34, 110);
-  // --c-secondary: rgb(82, 97, 237);
+  --c-primary-lighter: rgb(223, 238, 224);
+  --c-primary-light: rgb(112, 188, 139);
+  --c-primary: rgb(45, 146, 98);
+  --c-primary-dark: rgb(35, 86, 53);
+  --c-primary-darker: rgb(14, 48, 21);
+
 
   --c-green: #a6e989;
   --c-blue: #2683e7;
@@ -64,7 +63,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 body {
   display: flex;
@@ -123,7 +121,6 @@ label {
   text-align: center;
 }
 
-input,
 textarea,
 select {
   -webkit-appearance: none;
@@ -144,29 +141,6 @@ select {
 
   &::placeholder {
     color: rgba(100, 85, 69, 0.576);
-  }
-}
-
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  accent-color: black;
-  color: black;
-  background: transparent;
-  background-color: transparent;
-  text-transform: uppercase;
-  border: 3px solid black;
-  padding: 0.6em 1.2em;
-  margin-top: 1rem;
-  font-size: 1.1em;
-  font-family: inherit;
-  border-radius: 0.5rem;
-  transition: background-color 0.25s;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.467);
   }
 }
 
