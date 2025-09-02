@@ -1,9 +1,10 @@
 import "./style/App.scss";
 import { useEffect, useReducer } from "react";
-import { Div, DivRow, Section } from "./components/styled/Wrappers";
 import { getCharacters } from "./services/CharacterService";
 import { CharacterReducer } from "./reducers/CharacterReducer";
 import { CharacterContext } from "./contexts/CharacterContext";
+import { RouterProvider } from "react-router";
+import { router } from "./Router";
 
 function App() {
 	const [characters, dispatch] = useReducer(CharacterReducer, []);
@@ -22,19 +23,8 @@ function App() {
 
 	return (
 		<CharacterContext.Provider value={{ characters, dispatch }}>
-			<h1>DND SHEET</h1>
-			<Section>
-				{characters.map((char) => (
-					<Div key={char.id}>
-						<h3>{char.name}</h3>
-						<DivRow>
-							<Div>{char.race}</Div>
-							<Div>{char.class}</Div>
-							<Div>{char.level}</Div>
-						</DivRow>
-					</Div>
-				))}
-			</Section>
+			<RouterProvider router={router}>
+			</RouterProvider>
 		</CharacterContext.Provider>
 	);
 }

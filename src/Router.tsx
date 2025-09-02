@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { Layout } from "./pages/Layout/Layout";
+import { Layout } from "./pages/Layout";
 import { CharacterSheet } from "./pages/CharacterSheet";
 import { CharactersList } from "./pages/CharactersList";
 import { Home } from "./pages/Home";

@@ -1,5 +1,5 @@
 export type Character = {
-  id: string,
+  _id: string,
   name: string,
   race: string,
   class: string,

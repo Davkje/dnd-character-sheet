@@ -23,9 +23,9 @@
 
   --c-primary-lighter: rgb(223, 238, 224);
   --c-primary-light: rgb(112, 188, 139);
-  --c-primary: rgb(45, 146, 98);
-  --c-primary-dark: rgb(35, 86, 53);
-  --c-primary-darker: rgb(14, 48, 21);
+  --c-primary: rgb(66, 130, 99);
+  --c-primary-dark: rgb(30, 83, 49);
+  --c-primary-darker: rgb(17, 41, 29);
 
 
   --c-green: #a6e989;
@@ -106,11 +106,12 @@ h4 {
 
 a {
   font-weight: 500;
-  color: black;
+  color: var(--c-primary-light);
   text-decoration: inherit;
+  transition: color .5s ease;
 
   &:hover {
-    border-color: grey;
+    color: var(--c-primary-lighter);
   }
 }
 
@@ -153,9 +154,10 @@ textarea:focus,
 textarea:focus,
 select:focus,
 select:focus {
-  outline: solid rgb(0, 0, 0) 3px;
+  outline: solid 2px var(--c-primary-light);
   outline-offset: 0.25rem;
   box-shadow: none;
+  border-radius: .25rem;
 }
 
 ul {
