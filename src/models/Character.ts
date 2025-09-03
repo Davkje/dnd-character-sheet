@@ -3,10 +3,10 @@
 export type AbilityScores = {
   strength: number
   dexterity: number
-  intellect: number
+  constitution: number
+  intelligence: number
   wisdom: number
   charisma: number
-  constitution: number
 }
 
 export type Feature = {

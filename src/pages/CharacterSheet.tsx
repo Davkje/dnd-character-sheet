@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { useParams } from "react-router";
 import { CharacterContext } from "../contexts/CharacterContext";
+import { abilityLabels } from "../models/Abilities";
+import { ALL_SKILLS } from "../models/Skills";
 import {
 	Div,
 	DivRow,
@@ -9,8 +11,7 @@ import {
 	SkillContainer,
 	SkillsWrapper,
 } from "../components/styled/Wrappers";
-import { ALL_SKILLS } from "../models/skills";
-import { abilityLabels } from "../models/Abilities";
+import { getAbilityMod, getSavingThrowTotal, getSkillTotal } from "../utils/calculations";
 
 export const CharacterSheet = () => {
 	const { id } = useParams();
@@ -40,12 +41,16 @@ export const CharacterSheet = () => {
 				<Div>
 					<h3>Abilities</h3>
 					<DivRow>
-						{Object.entries(character.abilities).map(([ability, score]) => (
-							<Div key={ability}>
-								<h4>{abilityLabels[ability]}</h4>
-								<span>{score}</span>
-							</Div>
-						))}
+						{Object.entries(character.abilities).map(([ability, score]) => {
+              const abilityMod = getAbilityMod(score)
+							return (
+								<Div key={ability}>
+									<h4>{abilityLabels[ability]}</h4>
+									<span>{score}</span>
+									<span>{abilityMod}</span>
+								</Div>
+							);
+						})}
 					</DivRow>
 				</Div>
 				<Div>
@@ -79,14 +84,12 @@ export const CharacterSheet = () => {
 					<h3>Skills</h3>
 					<SkillsWrapper>
 						{ALL_SKILLS.map((skill) => {
+							const skillTotal = getSkillTotal(
+								character,
+								skill.ability as keyof typeof character.abilities,
+								skill.name
+							);
 							const proficient = character.proficientSkills.includes(skill.name);
-							const abilityScore =
-								character.abilities[
-									skill.ability as keyof typeof character.abilities
-								];
-							const abilityMod = Math.floor((abilityScore - 10) / 2);
-							const total =
-								abilityMod + (proficient ? character.proficiencyBonus : 0);
 							return (
 								<SkillContainer key={skill.name}>
 									<DivSmall>
@@ -94,11 +97,32 @@ export const CharacterSheet = () => {
 										<span>{skill.name}</span>
 										<span>{abilityLabels[skill.ability]}</span>
 									</DivSmall>
-									<span>{total}</span>
+									<span>{skillTotal}</span>
 								</SkillContainer>
 							);
 						})}
 					</SkillsWrapper>
+				</Div>
+				<Div>
+					<h3>Saving Throws</h3>
+					<h4>{character.proficientSavingThrows}</h4>
+					<DivRow>
+						{Object.entries(character.abilities).map(([ability]) => {
+							const total = getSavingThrowTotal(
+								character,
+								ability as keyof typeof character.abilities
+							);
+							const proficient = character.proficientSavingThrows.includes(ability);
+
+							return (
+								<Div key={ability}>
+									<h4>{abilityLabels[ability]}</h4>
+									<span>{total}</span>
+									<span>{proficient ? "Yes" : "No"}</span>
+								</Div>
+							);
+						})}
+					</DivRow>
 				</Div>
 			</SheetWrapper>
 		);

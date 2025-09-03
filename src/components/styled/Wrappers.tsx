@@ -56,7 +56,8 @@ export const DivSmall = styled.div`
   gap: 1rem;
 `;
 
-// CONTAINERS
+
+// --- SKILLS ---
 
 export const SkillsWrapper = styled.div`
 	display: flex;
@@ -70,5 +71,5 @@ export const SkillContainer = styled.div`
   justify-content: space-between;
   border: solid 2px var(--c-primary);
   border-radius: 0.25rem;
-  padding: 0.25rem;
+  padding: 0.25rem 1rem;
 `;

@@ -34,7 +34,7 @@
   --c-yellow: #fbe673;
 
   // Text
-  --c-text-light-1: var(--c-black);
+  --c-text-light-1: var(--c-primary-darker);
   --c-text-light-2: var(--c-blak-soft);
 
   --c-text-dark-1: var(--c-white);
@@ -56,8 +56,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: rgb(0, 0, 0);
-  background-color: white;
+  color: var(--c-primary-darker);
+  background-color: var(--c-primary-darker);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
