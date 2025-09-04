@@ -14,7 +14,13 @@ import {
 	SkillsWrapper,
 	Wrapper,
 } from "../components/styled/Wrappers";
-import { getAbilityMod, getSavingThrowTotal, getSkillTotal } from "../utils/calculations";
+import {
+	getAbilityMod,
+	getPrimaryAttackBonus,
+	getPrimarySaveDC,
+	getSavingThrowTotal,
+	getSkillTotal,
+} from "../utils/calculations";
 import { Loader } from "../components/Loader";
 import { Checked, UnChecked } from "../components/styled/Icons";
 
@@ -47,7 +53,10 @@ export const CharacterSheet = () => {
 				<Wrapper>
 					<h3>Hp</h3>
 					<Div>{character.hp}</Div>
-					<Div>Hit Dice</Div>
+					<Div>
+						{character.proficiencyBonus}
+						{character.hitDie}
+					</Div>
 				</Wrapper>
 				<Wrapper>
 					<h3>AC</h3>
@@ -64,16 +73,16 @@ export const CharacterSheet = () => {
 					<Div>{character.speed}ft</Div>
 				</Wrapper>
 				<Wrapper>
-					<h3>Prodiciency</h3>
+					<h3>Proficiency</h3>
 					<Div>+ {character.proficiencyBonus}</Div>
 				</Wrapper>
 				<Wrapper>
 					<h3>Spell Atk</h3>
-					<Div>None</Div>
+					<Div>{formatMod(getPrimaryAttackBonus(character))}</Div>
 				</Wrapper>
 				<Wrapper>
 					<h3>SPELL DC</h3>
-					<Div>None</Div>
+					<Div>{getPrimarySaveDC(character)}</Div>
 				</Wrapper>
 				{Object.entries(character.abilities).map(([ability, score]) => {
 					const abilityMod = getAbilityMod(score);

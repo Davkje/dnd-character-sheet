@@ -26,6 +26,8 @@ export type Character = {
   race: string
   level: number
   hp: number
+  hitDie: string
+  primaryAbility: string
   speed: number
   armourClass: number
   abilities: AbilityScores
