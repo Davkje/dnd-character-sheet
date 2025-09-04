@@ -10,12 +10,15 @@ export const CharactersList = () => {
 	return (
 		<PageWrapper>
 			<h1>CHARACTERS</h1>
-			<Section>
-        {!characters && <Loader/>}
-				{characters.map((char) => (
-					<CharacterPresentation key={char._id} character={char} />
-				))}
-			</Section>
+			{!characters || characters.length === 0 ? (
+				<Loader />
+			) : (
+				<Section>
+					{characters.map((char) => (
+						<CharacterPresentation key={char._id} character={char} />
+					))}
+				</Section>
+			)}
 		</PageWrapper>
 	);
 };

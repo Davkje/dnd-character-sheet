@@ -1,13 +1,13 @@
 import { Spinner } from "./styled/Spinner";
-import { Wrapper } from "./styled/Wrappers";
+import { Div } from "./styled/Wrappers";
 
 export const Loader = () => {
 	return (
 		<>
-			<Wrapper>
+			<Div>
 				<Spinner />
-        <p>Loading...</p>
-			</Wrapper>
+        <h3>Loading...</h3>
+			</Div>
 		</>
 	);
 };

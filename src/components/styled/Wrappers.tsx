@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 `;
 
 export const WrapperRow = styled(Wrapper)`
-  flex-direction: row;
+	flex-direction: row;
 `;
 
 export const PageWrapper = styled.div`
@@ -25,6 +25,19 @@ export const PageWrapper = styled.div`
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.5rem;
+`;
+
+export const PageWrapperGrid = styled.div`
+	max-width: 1100px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
+	padding: 0.5rem;
+`;
+
+export const Block1 = styled.div`
+	background-color: red;
 `;
 
 export const Section = styled.section`
@@ -45,7 +58,7 @@ export const SectionRow = styled(Section)`
 
 export const Div = styled.div`
 	display: flex;
-  width: 100%;
+	width: 100%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -60,7 +73,14 @@ export const DivRow = styled(Div)`
 
 export const DivSmall = styled.div`
 	display: flex;
+	align-items: center;
 	gap: 1rem;
+`;
+
+// --- IMAGE ---
+
+export const ImageWrapper = styled(Wrapper)`
+	background-color: var(--c-primary-darker);
 `;
 
 // --- SKILLS ---
@@ -78,4 +98,5 @@ export const SkillContainer = styled.div`
 	border: solid 2px var(--c-primary);
 	border-radius: 0.25rem;
 	padding: 0.25rem 1rem;
+	text-transform: capitalize;
 `;

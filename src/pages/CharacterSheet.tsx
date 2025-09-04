@@ -7,42 +7,85 @@ import {
 	Div,
 	DivRow,
 	DivSmall,
+	ImageWrapper,
 	PageWrapper,
+	PageWrapperGrid,
 	SkillContainer,
 	SkillsWrapper,
 	Wrapper,
-	WrapperRow,
 } from "../components/styled/Wrappers";
 import { getAbilityMod, getSavingThrowTotal, getSkillTotal } from "../utils/calculations";
 import { Loader } from "../components/Loader";
+import { Checked, UnChecked } from "../components/styled/Icons";
 
 export const CharacterSheet = () => {
 	const { id } = useParams();
 	const { characters } = useContext(CharacterContext);
 
+	const formatMod = (mod: number) => (mod >= 0 ? `+${mod}` : `${mod}`);
+
 	if (id) {
 		const character = characters.find((c) => c._id === id);
 
 		if (!character) {
-			return <>No character found</>;
+			return (
+				<>
+					<PageWrapper>{!character && <Loader />}</PageWrapper>
+				</>
+			);
 		}
 
 		return (
-			<PageWrapper>
+			<PageWrapperGrid>
 				<h1>{character.name}</h1>
-				{!character && <Loader />}
-				<WrapperRow>
+				<Wrapper>
 					<Div>{character.race}</Div>
 					<Div>{character.class}</Div>
 					<Div>Level {character.level}</Div>
-				</WrapperRow>
-				<WrapperRow>
-					<Div>{character.armourClass} AC</Div>
-					<Div>{character.hp} HP</Div>
-					<Div>{character.speed}ft</Div>
-					<Div>{character.proficiencyBonus} Prof</Div>
-				</WrapperRow>
+				</Wrapper>
+				<ImageWrapper />
 				<Wrapper>
+					<h3>Hp</h3>
+					<Div>{character.hp}</Div>
+					<Div>Hit Dice</Div>
+				</Wrapper>
+				<Wrapper>
+					<h3>AC</h3>
+					<Div>{character.armourClass}</Div>
+				</Wrapper>
+				<Wrapper>
+					<h3>Initiative</h3>
+					<DivRow>
+						<span>{formatMod(getAbilityMod(character.abilities.dexterity))}</span>
+					</DivRow>
+				</Wrapper>
+				<Wrapper>
+					<h3>Speed</h3>
+					<Div>{character.speed}ft</Div>
+				</Wrapper>
+				<Wrapper>
+					<h3>Prodiciency</h3>
+					<Div>+ {character.proficiencyBonus}</Div>
+				</Wrapper>
+				<Wrapper>
+					<h3>Spell Atk</h3>
+					<Div>None</Div>
+				</Wrapper>
+				<Wrapper>
+					<h3>SPELL DC</h3>
+					<Div>None</Div>
+				</Wrapper>
+				{Object.entries(character.abilities).map(([ability, score]) => {
+					const abilityMod = getAbilityMod(score);
+					return (
+						<Wrapper key={ability}>
+							<h4>{abilityLabels[ability]}</h4>
+							<span>{score}</span>
+							<span>{formatMod(abilityMod)}</span>
+						</Wrapper>
+					);
+				})}
+				<Wrapper className="three-column">
 					<h3>Abilities</h3>
 					<DivRow>
 						{Object.entries(character.abilities).map(([ability, score]) => {
@@ -51,13 +94,13 @@ export const CharacterSheet = () => {
 								<Div key={ability}>
 									<h4>{abilityLabels[ability]}</h4>
 									<span>{score}</span>
-									<span>{abilityMod}</span>
+									<span>{formatMod(abilityMod)}</span>
 								</Div>
 							);
 						})}
 					</DivRow>
 				</Wrapper>
-				<Wrapper>
+				<Wrapper className="three-column">
 					<h3>Features</h3>
 					{character.features.map((feat) => (
 						<DivRow key={feat.name}>
@@ -66,7 +109,7 @@ export const CharacterSheet = () => {
 						</DivRow>
 					))}
 				</Wrapper>
-				<Wrapper>
+				<Wrapper className="three-column">
 					<h3>Spells</h3>
 					{character.spells.map((spell) => (
 						<DivRow key={spell.name}>
@@ -75,7 +118,7 @@ export const CharacterSheet = () => {
 						</DivRow>
 					))}
 				</Wrapper>
-				<Wrapper>
+				<Wrapper className="three-column">
 					<h3>Items</h3>
 					<DivRow>
 						{character.items.map((item) => (
@@ -83,8 +126,7 @@ export const CharacterSheet = () => {
 						))}
 					</DivRow>
 				</Wrapper>
-
-				<Wrapper>
+				<Wrapper className="three-column">
 					<h3>Skills</h3>
 					<SkillsWrapper>
 						{ALL_SKILLS.map((skill) => {
@@ -97,17 +139,17 @@ export const CharacterSheet = () => {
 							return (
 								<SkillContainer key={skill.name}>
 									<DivSmall>
-										<span>{proficient ? "Yes" : "No"}</span>
+										{proficient ? <Checked /> : <UnChecked />}
 										<span>{skill.name}</span>
 										<span>{abilityLabels[skill.ability]}</span>
 									</DivSmall>
-									<span>{skillTotal}</span>
+									<span>{formatMod(skillTotal)}</span>
 								</SkillContainer>
 							);
 						})}
 					</SkillsWrapper>
 				</Wrapper>
-				<Wrapper>
+				<Wrapper className="three-column">
 					<h3>Saving Throws</h3>
 					<h4>{character.proficientSavingThrows}</h4>
 					<DivRow>
@@ -121,14 +163,14 @@ export const CharacterSheet = () => {
 							return (
 								<Div key={ability}>
 									<h4>{abilityLabels[ability]}</h4>
-									<span>{total}</span>
-									<span>{proficient ? "Yes" : "No"}</span>
+									<span>{formatMod(total)}</span>
+									{proficient ? <Checked /> : <UnChecked />}
 								</Div>
 							);
 						})}
 					</DivRow>
 				</Wrapper>
-			</PageWrapper>
+			</PageWrapperGrid>
 		);
 	}
 

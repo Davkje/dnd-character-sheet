@@ -2,6 +2,17 @@ import type { AbilityScores, Character } from "../models/Character";
 
 export const getAbilityMod = (score: number): number => Math.floor((score - 10) / 2);
 
+// export const getInitiative = (
+//   character: Character,
+// 	ability: keyof AbilityScores,
+// 	skillName: string)
+// : number => {
+//   const 
+//   const dexModifier = 
+//   const initiative = dexModifier +
+//   return 
+// }
+
 export const getSkillTotal = (
 	character: Character,
 	ability: keyof AbilityScores,
