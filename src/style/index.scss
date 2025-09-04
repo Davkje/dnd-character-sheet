@@ -9,7 +9,7 @@
 
 // Color palette
 :root {
-  --c-white: #824242;
+  --c-white: #fcfcfc;
   --c-white-soft: #e6e6e6;
   --c-white-mute: #c7c7c7;
   --c-white-trans: rgba(255, 255, 255, 0.3);
@@ -26,7 +26,6 @@
   --c-primary: rgb(66, 130, 99);
   --c-primary-dark: rgb(30, 83, 49);
   --c-primary-darker: rgb(17, 41, 29);
-
 
   --c-green: #a6e989;
   --c-blue: #2683e7;
@@ -56,7 +55,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: var(--c-primary-darker);
+  color: var(--c-text-light-1);
   background-color: var(--c-primary-darker);
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
 // WRAPPERS
-
-export const PageWrapper = styled.div`
-	max-width: 1100px;
+export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	background-color: var(--c-primary-lighter);
 `;
 
-export const SheetWrapper = styled.div`
+export const WrapperRow = styled(Wrapper)`
+  flex-direction: row;
+`;
+
+export const PageWrapper = styled.div`
 	max-width: 1100px;
 	width: 100%;
 	display: flex;
@@ -37,14 +45,13 @@ export const SectionRow = styled(Section)`
 
 export const Div = styled.div`
 	display: flex;
+  width: 100%;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	background-color: var(--c-white-trans);
+	border-radius: 0.25rem;
 	gap: 0.5rem;
-	width: 100%;
-	padding: 0.5rem;
-	border-radius: 0.5rem;
-	background-color: var(--c-primary-lighter);
 `;
 
 export const DivRow = styled(Div)`
@@ -53,23 +60,22 @@ export const DivRow = styled(Div)`
 
 export const DivSmall = styled.div`
 	display: flex;
-  gap: 1rem;
+	gap: 1rem;
 `;
-
 
 // --- SKILLS ---
 
 export const SkillsWrapper = styled.div`
 	display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: .25rem;
+	width: 100%;
+	flex-direction: column;
+	gap: 0.25rem;
 `;
 
 export const SkillContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border: solid 2px var(--c-primary);
-  border-radius: 0.25rem;
-  padding: 0.25rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	border: solid 2px var(--c-primary);
+	border-radius: 0.25rem;
+	padding: 0.25rem 1rem;
 `;

@@ -7,11 +7,14 @@ import {
 	Div,
 	DivRow,
 	DivSmall,
-	SheetWrapper,
+	PageWrapper,
 	SkillContainer,
 	SkillsWrapper,
+	Wrapper,
+	WrapperRow,
 } from "../components/styled/Wrappers";
 import { getAbilityMod, getSavingThrowTotal, getSkillTotal } from "../utils/calculations";
+import { Loader } from "../components/Loader";
 
 export const CharacterSheet = () => {
 	const { id } = useParams();
@@ -25,24 +28,25 @@ export const CharacterSheet = () => {
 		}
 
 		return (
-			<SheetWrapper>
+			<PageWrapper>
 				<h1>{character.name}</h1>
-				<DivRow>
+				{!character && <Loader />}
+				<WrapperRow>
 					<Div>{character.race}</Div>
 					<Div>{character.class}</Div>
 					<Div>Level {character.level}</Div>
-				</DivRow>
-				<DivRow>
+				</WrapperRow>
+				<WrapperRow>
 					<Div>{character.armourClass} AC</Div>
 					<Div>{character.hp} HP</Div>
 					<Div>{character.speed}ft</Div>
 					<Div>{character.proficiencyBonus} Prof</Div>
-				</DivRow>
-				<Div>
+				</WrapperRow>
+				<Wrapper>
 					<h3>Abilities</h3>
 					<DivRow>
 						{Object.entries(character.abilities).map(([ability, score]) => {
-              const abilityMod = getAbilityMod(score)
+							const abilityMod = getAbilityMod(score);
 							return (
 								<Div key={ability}>
 									<h4>{abilityLabels[ability]}</h4>
@@ -52,8 +56,8 @@ export const CharacterSheet = () => {
 							);
 						})}
 					</DivRow>
-				</Div>
-				<Div>
+				</Wrapper>
+				<Wrapper>
 					<h3>Features</h3>
 					{character.features.map((feat) => (
 						<DivRow key={feat.name}>
@@ -61,8 +65,8 @@ export const CharacterSheet = () => {
 							<Div>{feat.description}</Div>
 						</DivRow>
 					))}
-				</Div>
-				<Div>
+				</Wrapper>
+				<Wrapper>
 					<h3>Spells</h3>
 					{character.spells.map((spell) => (
 						<DivRow key={spell.name}>
@@ -70,17 +74,17 @@ export const CharacterSheet = () => {
 							<Div>{spell.description}</Div>
 						</DivRow>
 					))}
-				</Div>
-				<Div>
+				</Wrapper>
+				<Wrapper>
 					<h3>Items</h3>
 					<DivRow>
 						{character.items.map((item) => (
 							<span key={item}>{item}</span>
 						))}
 					</DivRow>
-				</Div>
+				</Wrapper>
 
-				<Div>
+				<Wrapper>
 					<h3>Skills</h3>
 					<SkillsWrapper>
 						{ALL_SKILLS.map((skill) => {
@@ -102,8 +106,8 @@ export const CharacterSheet = () => {
 							);
 						})}
 					</SkillsWrapper>
-				</Div>
-				<Div>
+				</Wrapper>
+				<Wrapper>
 					<h3>Saving Throws</h3>
 					<h4>{character.proficientSavingThrows}</h4>
 					<DivRow>
@@ -123,10 +127,14 @@ export const CharacterSheet = () => {
 							);
 						})}
 					</DivRow>
-				</Div>
-			</SheetWrapper>
+				</Wrapper>
+			</PageWrapper>
 		);
 	}
 
-	return <>No id found</>;
+	return (
+		<>
+			<span>No id found</span>
+		</>
+	);
 };

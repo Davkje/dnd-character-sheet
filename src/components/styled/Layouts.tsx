@@ -23,7 +23,7 @@ export const Main = styled.main`
 `;
 
 export const Footer = styled.footer`
-	background-color: var(--c-primary-darker);
+	background-color: var(--c-primary);
 	width: 100%;
 	min-height: 50px;
 `;
