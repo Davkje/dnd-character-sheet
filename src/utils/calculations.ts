@@ -31,3 +31,5 @@ export const getPrimarySaveDC = (character: Character): number => {
 	);
 	return abilityMod + character.proficiencyBonus + 8;
 };
+
+export const formatMod = (mod: number) => (mod >= 0 ? `+${mod}` : `${mod}`);

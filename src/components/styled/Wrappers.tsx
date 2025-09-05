@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-// WRAPPERS
+// --- WRAPPERS ---
+
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -24,7 +25,7 @@ export const PageWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	gap: 0.5rem;
-	padding: 0.5rem;
+  padding: 0.5rem;
 `;
 
 export const PageWrapperGrid = styled.div`
@@ -33,11 +34,6 @@ export const PageWrapperGrid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 0.5rem;
-	padding: 0.5rem;
-`;
-
-export const Block1 = styled.div`
-	background-color: red;
 `;
 
 export const Section = styled.section`
@@ -47,14 +43,13 @@ export const Section = styled.section`
 	gap: 0.5rem;
 	width: 100%;
 	border-radius: 0.25rem;
-	/* background-color: var(--c-primary-dark); */
 `;
 
 export const SectionRow = styled(Section)`
 	flex-direction: row;
 `;
 
-// DIV
+// --- DIV ---
 
 export const Div = styled.div`
 	display: flex;
@@ -80,6 +75,7 @@ export const DivSmall = styled.div`
 // --- IMAGE ---
 
 export const ImageWrapper = styled(Wrapper)`
+	min-height: 170px;
 	background-color: var(--c-primary-darker);
 `;
 
@@ -97,6 +93,25 @@ export const SkillContainer = styled.div`
 	justify-content: space-between;
 	border: solid 2px var(--c-primary);
 	border-radius: 0.25rem;
-	padding: 0.25rem 1rem;
+	padding: 0.25rem .5rem;
 	text-transform: capitalize;
+`;
+
+// --- MODAL ---
+
+export const ModalOverlay = styled(Div)`
+	position: fixed;
+	background-color: var(--c-black-trans);
+	padding: .5rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+export const Modal = styled(Div)`
+	background-color: var(--c-primary-light);
+  border: solid 3px var(--c-primary-darker);
+  max-width: 300px;
+  padding: 1rem;
 `;

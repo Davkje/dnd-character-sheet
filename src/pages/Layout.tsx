@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router";
 import { Footer, Header, Main, Nav } from "../components/styled/Layouts";
+import { PageWrapper } from "../components/styled/Wrappers";
 
 export const Layout = () => {
 	return (
@@ -11,7 +12,9 @@ export const Layout = () => {
 				</Nav>
 			</Header>
 			<Main>
-				<Outlet />
+				<PageWrapper>
+					<Outlet />
+				</PageWrapper>
 			</Main>
 			<Footer></Footer>
 		</>

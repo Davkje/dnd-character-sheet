@@ -28,3 +28,8 @@ type ButtonProps = {
 export const ButtonCustom = styled(Button)<ButtonProps>`
 	background-color: ${(props) => props.bgColor || "red"};
 `;
+
+
+export const AbilityButton = styled(Button)`
+  background-color: var(--c-primary-lighter);
+`;

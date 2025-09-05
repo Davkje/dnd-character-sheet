@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Section, PageWrapper } from "../components/styled/Wrappers";
+import { Section } from "../components/styled/Wrappers";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { CharacterPresentation } from "../components/CharacterPresentation";
 import { Loader } from "../components/Loader";
@@ -8,7 +8,7 @@ export const CharactersList = () => {
 	const { characters } = useContext(CharacterContext);
 
 	return (
-		<PageWrapper>
+		<>
 			<h1>CHARACTERS</h1>
 			{!characters || characters.length === 0 ? (
 				<Loader />
@@ -19,6 +19,6 @@ export const CharactersList = () => {
 					))}
 				</Section>
 			)}
-		</PageWrapper>
+		</>
 	);
 };

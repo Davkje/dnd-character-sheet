@@ -81,10 +81,11 @@ label {
   line-height: 1.1;
   color: var(--c-primary-darker);
   font-weight: bold;
+  text-align: center;
 }
 
 h1 {
-  font-size: clamp(4rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   text-align: center;
   grid-column: span 3;
 }
@@ -99,7 +100,8 @@ h3 {
 }
 
 h4 {
-  margin: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 0.25rem;
 }
 
 a {
