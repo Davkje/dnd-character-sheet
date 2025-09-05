@@ -33,6 +33,14 @@ export const ButtonCustom = styled(Button)<ButtonProps>`
 `;
 
 
+export const PrimaryAbilityButton = styled(Button)`
+  background-color: var(--c-primary-lighter);
+  padding: .25rem;
+  border: none;
+  width: 100%;
+`;
+
+
 export const AbilityButton = styled(Button)`
   background-color: var(--c-primary-lighter);
 `;

@@ -21,7 +21,7 @@ import {
 } from "../utils/calculations";
 import { Loader } from "../components/Loader";
 import { Checked, UnChecked } from "../components/styled/Icons";
-import { AbilityButton, Button } from "../components/styled/Buttons";
+import { AbilityButton, PrimaryAbilityButton } from "../components/styled/Buttons";
 import { AbilityModal } from "../components/AbilityModal";
 import type { AbilityScores } from "../models/Character";
 
@@ -55,7 +55,7 @@ export const CharacterSheet = () => {
 				<PageWrapperGrid>
 					<Wrapper>
 						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Ability</h3>
-						<Button
+						<PrimaryAbilityButton
 							onClick={() =>
 								setSelectedPrimaryAbility((prev) =>
 									prev === "spell" ? "weapon" : "spell"
@@ -65,7 +65,7 @@ export const CharacterSheet = () => {
 							{selectedPrimaryAbility === "spell"
 								? `${abilityLabels[character.primarySpellAbility]}`
 								: `${abilityLabels[character.primaryWeaponAbility]}`}
-						</Button>
+						</PrimaryAbilityButton>
 						<Div>
 							{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Atk{" "}
 							{formatMod(getPrimaryAttackBonus(character, primaryAbilityKey))}
@@ -78,8 +78,8 @@ export const CharacterSheet = () => {
 						</Div>
 					</Wrapper>
 					<Wrapper>
-						<Div>{character.race}</Div>
-						<Div>{character.class}</Div>
+						<h3>{character.race}</h3>
+						<h4>{character.class}</h4>
 						<Div>Level {character.level}</Div>
 						<Div>Prof Bonus{formatMod(character.proficiencyBonus)}</Div>
 					</Wrapper>
