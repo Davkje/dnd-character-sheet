@@ -112,6 +112,7 @@ export const ModalOverlay = styled(Div)`
 export const Modal = styled(Div)`
 	background-color: var(--c-primary-light);
   border: solid 3px var(--c-primary-darker);
+  border-radius: 0.5rem;
   max-width: 300px;
   padding: 1rem;
 `;

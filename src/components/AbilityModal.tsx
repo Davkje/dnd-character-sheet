@@ -51,6 +51,7 @@ export const AbilityModal = ({ ability, character, onClose }: Props) => {
 			<Modal onClick={(e) => e.stopPropagation()}>
 				<Div>
 					<h2>{ability}</h2>
+          {character.primaryAbility === ability && <h3>Primary</h3>}
 					<DivRow>
 						<p>Score: {score}</p>
 						<p>Mod: {formatMod(modifier)}</p>

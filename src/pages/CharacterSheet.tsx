@@ -65,7 +65,7 @@ export const CharacterSheet = () => {
 						<Div>{character.armourClass}</Div>
 					</Wrapper>
 					<Wrapper>
-						<h3>Initiative</h3>
+						<h3>Init</h3>
 						<DivRow>
 							<span>{formatMod(getAbilityMod(character.abilities.dexterity))}</span>
 						</DivRow>
@@ -75,7 +75,7 @@ export const CharacterSheet = () => {
 						<Div>{character.speed}ft</Div>
 					</Wrapper>
 					<Wrapper>
-						<h3>Proficiency</h3>
+						<h3>Prof Bonus</h3>
 						<Div>{formatMod(character.proficiencyBonus)}</Div>
 					</Wrapper>
 					<Wrapper>
@@ -123,7 +123,7 @@ export const CharacterSheet = () => {
 						<h3>Items</h3>
 						<DivRow>
 							{character.items.map((item) => (
-								<span key={item}>{item}</span>
+								<span key={item}>{item}, </span>
 							))}
 						</DivRow>
 					</Wrapper>
