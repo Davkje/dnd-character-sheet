@@ -19,6 +19,9 @@ export const Button = styled.button`
 	&:hover {
 		background-color: var(--c-primary-light);
 	}
+  &:disabled {
+    background-color: var(--c-black-trans);
+  }
 `;
 
 type ButtonProps = {

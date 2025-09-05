@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Section } from "../components/styled/Wrappers";
+import { CharacterList } from "../components/styled/Wrappers";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { CharacterPresentation } from "../components/CharacterPresentation";
 import { Loader } from "../components/Loader";
@@ -13,11 +13,11 @@ export const CharactersList = () => {
 			{!characters || characters.length === 0 ? (
 				<Loader />
 			) : (
-				<Section>
+				<CharacterList>
 					{characters.map((char) => (
 						<CharacterPresentation key={char._id} character={char} />
 					))}
-				</Section>
+				</CharacterList>
 			)}
 		</>
 	);

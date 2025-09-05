@@ -7,7 +7,6 @@ import {
 	Div,
 	DivRow,
 	DivSmall,
-	ImageWrapper,
 	PageWrapperGrid,
 	SkillContainer,
 	SkillsWrapper,
@@ -22,7 +21,7 @@ import {
 } from "../utils/calculations";
 import { Loader } from "../components/Loader";
 import { Checked, UnChecked } from "../components/styled/Icons";
-import { AbilityButton } from "../components/styled/Buttons";
+import { AbilityButton, Button } from "../components/styled/Buttons";
 import { AbilityModal } from "../components/AbilityModal";
 import type { AbilityScores } from "../models/Character";
 
@@ -30,6 +29,9 @@ export const CharacterSheet = () => {
 	const { id } = useParams();
 	const { characters } = useContext(CharacterContext);
 	const [selectedAbility, setSelectedAbility] = useState<keyof AbilityScores | null>(null);
+	const [selectedPrimaryAbility, setSelectedPrimaryAbility] = useState<"spell" | "weapon">(
+		"spell"
+	);
 
 	if (id) {
 		const character = characters.find((c) => c._id === id);
@@ -42,16 +44,45 @@ export const CharacterSheet = () => {
 			);
 		}
 
+		const primaryAbilityKey: keyof AbilityScores =
+			selectedPrimaryAbility === "spell"
+				? (character.primarySpellAbility as keyof AbilityScores)
+				: (character.primaryWeaponAbility as keyof AbilityScores);
+
 		return (
 			<>
 				<h1>{character.name}</h1>
 				<PageWrapperGrid>
 					<Wrapper>
+						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Ability</h3>
+						<Button
+							onClick={() =>
+								setSelectedPrimaryAbility((prev) =>
+									prev === "spell" ? "weapon" : "spell"
+								)
+							}
+						>
+							{selectedPrimaryAbility === "spell"
+								? `${abilityLabels[character.primarySpellAbility]}`
+								: `${abilityLabels[character.primaryWeaponAbility]}`}
+						</Button>
+						<Div>
+							{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Atk{" "}
+							{formatMod(getPrimaryAttackBonus(character, primaryAbilityKey))}
+						</Div>
+						<Div>
+							{selectedPrimaryAbility === "spell"
+								? "Spell"
+								: `${abilityLabels[character.primaryWeaponAbility]}`}{" "}
+							DC {getPrimarySaveDC(character, primaryAbilityKey)}
+						</Div>
+					</Wrapper>
+					<Wrapper>
 						<Div>{character.race}</Div>
 						<Div>{character.class}</Div>
 						<Div>Level {character.level}</Div>
+						<Div>Prof Bonus{formatMod(character.proficiencyBonus)}</Div>
 					</Wrapper>
-					<ImageWrapper />
 					<Wrapper>
 						<h3>Hp</h3>
 						<Div>{character.hp}</Div>
@@ -74,18 +105,17 @@ export const CharacterSheet = () => {
 						<h3>Speed</h3>
 						<Div>{character.speed}ft</Div>
 					</Wrapper>
-					<Wrapper>
-						<h3>Prof Bonus</h3>
-						<Div>{formatMod(character.proficiencyBonus)}</Div>
-					</Wrapper>
-					<Wrapper>
-						<h3>Primary Atk</h3>
-						<Div>{formatMod(getPrimaryAttackBonus(character))}</Div>
-					</Wrapper>
-					<Wrapper>
-						<h3>Primary DC</h3>
-						<Div>{getPrimarySaveDC(character)}</Div>
-					</Wrapper>
+					{/* <Wrapper>
+						
+					</Wrapper> */}
+					{/* <Wrapper>
+						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Atk</h3>
+						<Div>{formatMod(getPrimaryAttackBonus(character, primaryAbilityKey))}</Div>
+					</Wrapper> */}
+					{/* <Wrapper>
+						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} DC</h3>
+						<Div>{getPrimarySaveDC(character, primaryAbilityKey)}</Div>
+					</Wrapper> */}
 
 					{/* ABILITY BUTTONS */}
 
@@ -121,11 +151,12 @@ export const CharacterSheet = () => {
 					</Wrapper>
 					<Wrapper className="three-column">
 						<h3>Items</h3>
-						<DivRow>
-							{character.items.map((item) => (
-								<span key={item}>{item}, </span>
-							))}
-						</DivRow>
+						{character.items.map((item) => (
+							<DivRow key={item.name}>
+								<h4>{item.name}</h4>
+								<Div>{item.description}</Div>
+							</DivRow>
+						))}
 					</Wrapper>
 					<Wrapper className="three-column">
 						<h3>Skills</h3>
@@ -156,7 +187,7 @@ export const CharacterSheet = () => {
 
 				{selectedAbility && (
 					<AbilityModal
-						ability={selectedAbility}
+						ability={selectedAbility as keyof AbilityScores}
 						character={character}
 						onClose={() => setSelectedAbility(null)}
 					/>

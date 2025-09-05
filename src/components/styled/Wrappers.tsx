@@ -72,6 +72,34 @@ export const DivSmall = styled.div`
 	gap: 1rem;
 `;
 
+// --- CHARACTER LIST ---
+
+export const CharacterList = styled(Wrapper)`
+  background-color: var(--c-primary);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+`;
+
+export const CharacterListItem = styled(Wrapper)`
+  grid-column: span 6;
+
+  a {
+    color: var(--c-primary-darker);
+    &:hover {
+      color: var(--c-primary);
+    }
+  }
+
+
+  @media screen and (min-width: 600px) {
+    grid-column: span 3;
+  }
+
+  @media screen and (min-width: 900px) {
+    grid-column: span 2;
+  }
+`;
+
 // --- IMAGE ---
 
 export const ImageWrapper = styled(Wrapper)`

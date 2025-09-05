@@ -9,6 +9,11 @@ export type AbilityScores = {
   charisma: number
 }
 
+export type Item = {
+  name: string
+  description: string
+}
+
 export type Feature = {
   name: string
   description: string
@@ -28,13 +33,15 @@ export type Character = {
   hp: number
   hitDie: string
   primaryAbility: string
+  primarySpellAbility: string
+  primaryWeaponAbility: string
   speed: number
   armourClass: number
   abilities: AbilityScores
   proficiencyBonus: number
   proficientSkills: string[]
   proficientSavingThrows: string[]
-  items: string[]
+  items: Item[]
   features: Feature[]
   spells: Spell[]
 }

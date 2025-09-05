@@ -18,18 +18,14 @@ export const getSavingThrowTotal = (character: Character, ability: keyof Ability
 	return abilityMod + (proficient ? character.proficiencyBonus : 0);
 };
 
-export const getPrimaryAttackBonus = (character: Character): number => {
-	const abilityMod = getAbilityMod(
-		character.abilities[character.primaryAbility as keyof typeof character.abilities]
-	);
-	return abilityMod + character.proficiencyBonus;
+export const getPrimaryAttackBonus = (character: Character, abilityKey?: keyof AbilityScores) => {
+	const key = abilityKey ?? (character.primaryAbility as keyof AbilityScores);
+	return getAbilityMod(character.abilities[key]) + character.proficiencyBonus;
 };
 
-export const getPrimarySaveDC = (character: Character): number => {
-	const abilityMod = getAbilityMod(
-		character.abilities[character.primaryAbility as keyof typeof character.abilities]
-	);
-	return abilityMod + character.proficiencyBonus + 8;
+export const getPrimarySaveDC = (character: Character, abilityKey?: keyof AbilityScores) => {
+	const key = abilityKey ?? (character.primaryAbility as keyof AbilityScores);
+	return 8 + getAbilityMod(character.abilities[key]) + character.proficiencyBonus;
 };
 
 export const formatMod = (mod: number) => (mod >= 0 ? `+${mod}` : `${mod}`);
