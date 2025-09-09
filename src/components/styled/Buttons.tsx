@@ -6,8 +6,11 @@ export const Button = styled.button`
 	accent-color: var(--c-primary-darker);
 	border: 3px solid var(--c-primary-darker);
 	border-radius: 0.5rem;
-	padding: 0.6em 1.2em;
-	font-size: 1.1em;
+	padding: 0.4em 1.2em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1em;
 	font-weight: bold;
 	font-family: inherit;
 	text-transform: uppercase;
@@ -19,28 +22,19 @@ export const Button = styled.button`
 	&:hover {
 		background-color: var(--c-primary-light);
 	}
-  &:disabled {
-    background-color: var(--c-black-trans);
-  }
+	&:disabled {
+		background-color: var(--c-black-trans);
+	}
 `;
-
-type ButtonProps = {
-	bgColor?: string;
-};
-
-export const ButtonCustom = styled(Button)<ButtonProps>`
-	background-color: ${(props) => props.bgColor || "red"};
-`;
-
 
 export const PrimaryAbilityButton = styled(Button)`
-  background-color: var(--c-primary-lighter);
-  padding: .25rem;
-  border: none;
-  width: 100%;
+	background-color: var(--c-primary-lighter);
+	padding: 0.25rem;
+	border: none;
+	width: 100%;
 `;
 
-
 export const AbilityButton = styled(Button)`
-  background-color: var(--c-primary-lighter);
+	background-color: var(--c-primary-lighter);
+	flex-direction: column;
 `;

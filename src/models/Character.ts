@@ -25,7 +25,7 @@ export type Spell = {
 }
 
 export type Character = {
-  _id: string
+  _id?: string
   name: string
   class: string
   race: string

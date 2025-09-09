@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { abilityLabels } from "../models/Abilities";
 import { ALL_SKILLS } from "../models/Skills";
@@ -21,14 +21,16 @@ import {
 } from "../utils/calculations";
 import { Loader } from "../components/Loader";
 import { Checked, UnChecked } from "../components/styled/Icons";
-import { AbilityButton, PrimaryAbilityButton } from "../components/styled/Buttons";
+import { AbilityButton, Button, PrimaryAbilityButton } from "../components/styled/Buttons";
 import { AbilityModal } from "../components/AbilityModal";
 import type { AbilityScores } from "../models/Character";
+import { CharacterSettings } from "../components/CharacterSettings";
 
 export const CharacterSheet = () => {
 	const { id } = useParams();
 	const { characters } = useContext(CharacterContext);
 	const [selectedAbility, setSelectedAbility] = useState<keyof AbilityScores | null>(null);
+	const [settingsOpened, setSettingsOpened] = useState(false);
 	const [selectedPrimaryAbility, setSelectedPrimaryAbility] = useState<"spell" | "weapon">(
 		"spell"
 	);
@@ -51,7 +53,17 @@ export const CharacterSheet = () => {
 
 		return (
 			<>
-				<h1>{character.name}</h1>
+				<DivRow>
+					<Link to={"/characters"}>Back</Link>
+					<h1>{character.name}</h1>
+					<Button
+						onClick={() => {
+							setSettingsOpened(true);
+						}}
+					>
+						<span className="material-symbols-outlined">settings</span>
+					</Button>
+				</DivRow>
 				<PageWrapperGrid>
 					<Wrapper>
 						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Ability</h3>
@@ -97,25 +109,14 @@ export const CharacterSheet = () => {
 					</Wrapper>
 					<Wrapper>
 						<h3>Init</h3>
-						<DivRow>
+						<Div>
 							<span>{formatMod(getAbilityMod(character.abilities.dexterity))}</span>
-						</DivRow>
+						</Div>
 					</Wrapper>
 					<Wrapper>
 						<h3>Speed</h3>
 						<Div>{character.speed}ft</Div>
 					</Wrapper>
-					{/* <Wrapper>
-						
-					</Wrapper> */}
-					{/* <Wrapper>
-						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Atk</h3>
-						<Div>{formatMod(getPrimaryAttackBonus(character, primaryAbilityKey))}</Div>
-					</Wrapper> */}
-					{/* <Wrapper>
-						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} DC</h3>
-						<Div>{getPrimarySaveDC(character, primaryAbilityKey)}</Div>
-					</Wrapper> */}
 
 					{/* ABILITY BUTTONS */}
 
@@ -192,6 +193,9 @@ export const CharacterSheet = () => {
 						onClose={() => setSelectedAbility(null)}
 					/>
 				)}
+
+				{/* SETTINGS MODAL */}
+				{settingsOpened && <CharacterSettings onClose={() => setSettingsOpened(false)} />}
 			</>
 		);
 	}

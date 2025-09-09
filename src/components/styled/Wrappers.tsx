@@ -64,6 +64,7 @@ export const Div = styled.div`
 
 export const DivRow = styled(Div)`
 	flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const DivSmall = styled.div`
@@ -144,3 +145,6 @@ export const Modal = styled(Div)`
   max-width: 300px;
   padding: 1rem;
 `;
+
+// Settings
+

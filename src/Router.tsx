@@ -4,6 +4,7 @@ import { CharacterSheet } from "./pages/CharacterSheet";
 import { CharactersList } from "./pages/CharactersList";
 import { Home } from "./pages/Home";
 import { Error } from "./pages/Error";
+import { CreatePage } from "./pages/CreatePage";
 
 export const router = createBrowserRouter([
 	{
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
 			{
 				path: "/",
 				element: <Home />,
+			},
+      {
+				path: "/create",
+				element: <CreatePage />,
 			},
 			{
 				path: "/characters",
