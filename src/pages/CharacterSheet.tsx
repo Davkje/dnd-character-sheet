@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { abilityLabels } from "../models/Abilities";
 import { ALL_SKILLS } from "../models/Skills";
@@ -21,16 +21,17 @@ import {
 } from "../utils/calculations";
 import { Loader } from "../components/Loader";
 import { Checked, UnChecked } from "../components/styled/Icons";
-import { AbilityButton, Button, PrimaryAbilityButton } from "../components/styled/Buttons";
+import { AbilityButton, Button } from "../components/styled/Buttons";
 import { AbilityModal } from "../components/AbilityModal";
 import type { AbilityScores } from "../models/Character";
 import { CharacterSettings } from "../components/CharacterSettings";
 
 export const CharacterSheet = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const { characters } = useContext(CharacterContext);
 	const [selectedAbility, setSelectedAbility] = useState<keyof AbilityScores | null>(null);
-	const [settingsOpened, setSettingsOpened] = useState(false);
+	const [SettingsOpened, setSettingsOpened] = useState(false);
 	const [selectedPrimaryAbility, setSelectedPrimaryAbility] = useState<"spell" | "weapon">(
 		"spell"
 	);
@@ -67,17 +68,11 @@ export const CharacterSheet = () => {
 				<PageWrapperGrid>
 					<Wrapper>
 						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Ability</h3>
-						<PrimaryAbilityButton
-							onClick={() =>
-								setSelectedPrimaryAbility((prev) =>
-									prev === "spell" ? "weapon" : "spell"
-								)
-							}
-						>
+						<h4>
 							{selectedPrimaryAbility === "spell"
 								? `${abilityLabels[character.primarySpellAbility]}`
 								: `${abilityLabels[character.primaryWeaponAbility]}`}
-						</PrimaryAbilityButton>
+						</h4>
 						<Div>
 							{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Atk{" "}
 							{formatMod(getPrimaryAttackBonus(character, primaryAbilityKey))}
@@ -195,7 +190,15 @@ export const CharacterSheet = () => {
 				)}
 
 				{/* SETTINGS MODAL */}
-				{settingsOpened && <CharacterSettings onClose={() => setSettingsOpened(false)} />}
+				{SettingsOpened && (
+					<CharacterSettings
+						onClose={() => setSettingsOpened(false)}
+						character={character}
+						selectedPrimaryAbility={selectedPrimaryAbility} // ← skicka med
+						onPrimaryChange={(choice) => setSelectedPrimaryAbility(choice)} // ← ändrar state i CharacterSheet
+						onDeleted={() => navigate("/characters")}
+					/>
+				)}
 			</>
 		);
 	}
