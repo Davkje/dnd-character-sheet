@@ -11,7 +11,8 @@ export const Wrapper = styled.div`
 	width: 100%;
 	padding: 0.5rem;
 	border-radius: 0.5rem;
-	background-color: var(--c-primary-lighter);
+	background-color: var(--c-bg-1);
+	border: solid 2px var(--c-out);
 `;
 
 export const WrapperRow = styled(Wrapper)`
@@ -57,7 +58,6 @@ export const Div = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: var(--c-white-trans);
 	border-radius: 0.25rem;
 	gap: 0.5rem;
 `;
@@ -76,21 +76,13 @@ export const DivSmall = styled.div`
 // --- CHARACTER LIST ---
 
 export const CharacterList = styled(Wrapper)`
-  background-color: var(--c-primary);
+  background-color: var(--c-bg-2);
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 `;
 
 export const CharacterListItem = styled(Wrapper)`
   grid-column: span 6;
-
-  a {
-    color: var(--c-primary-darker);
-    &:hover {
-      color: var(--c-primary);
-    }
-  }
-
 
   @media screen and (min-width: 600px) {
     grid-column: span 3;
@@ -101,15 +93,32 @@ export const CharacterListItem = styled(Wrapper)`
   }
 `;
 
-// --- IMAGE ---
+// --- CHARACTER CREATE ---
+export const CreateForm = styled.form`
+  /* background-color: #ff000024; */
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
 
+export const FormSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* justify-content: center; */
+  /* background-color: #ff000023; */
+`;
+
+
+// --- IMAGE ---
 export const ImageWrapper = styled(Wrapper)`
 	min-height: 170px;
-	background-color: var(--c-primary-darker);
+	background-color: var(--c-bg-2);
 `;
 
 // --- SKILLS ---
-
 export const SkillsWrapper = styled.div`
 	display: flex;
 	width: 100%;
@@ -120,7 +129,7 @@ export const SkillsWrapper = styled.div`
 export const SkillContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	border: solid 2px var(--c-primary);
+	border: solid 2px var(--c-div);
 	border-radius: 0.25rem;
 	padding: 0.25rem .5rem;
 	text-transform: capitalize;
@@ -139,12 +148,15 @@ export const ModalOverlay = styled(Div)`
 `;
 
 export const Modal = styled(Div)`
-	background-color: var(--c-primary-light);
-  border: solid 3px var(--c-primary-darker);
+	background-color: var(--c-bg-1);
+  border: solid 3px var(--c-div);
   border-radius: 0.5rem;
   max-width: 300px;
   padding: 1rem;
 `;
 
-// Settings
+// HEADER SECTION
 
+export const TopSection = styled(SectionRow)`
+  justify-content: space-between;
+`;

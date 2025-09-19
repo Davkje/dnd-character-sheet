@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-	background-color: var(--c-primary);
-	color: var(--c-primary-darker);
-	accent-color: var(--c-primary-darker);
-	border: 3px solid var(--c-primary-darker);
+	background-color: var(--c-bg-2);
+	color: var(--c-text-1);
+	accent-color: var(--c-text-1);
+	border: 2px solid var(--c-div);
 	border-radius: 0.5rem;
 	padding: 0.4em 1.2em;
 	display: flex;
@@ -20,21 +20,27 @@ export const Button = styled.button`
 	appearance: none;
 	cursor: pointer;
 	&:hover {
-		background-color: var(--c-primary-light);
+		background-color: var(--c-trans-2);
 	}
 	&:disabled {
-		background-color: var(--c-black-trans);
+    color: var(--c-div);
 	}
-`;
-
-export const PrimaryAbilityButton = styled(Button)`
-	background-color: var(--c-primary-lighter);
-	padding: 0.25rem;
-	border: none;
-	width: 100%;
 `;
 
 export const AbilityButton = styled(Button)`
-	background-color: var(--c-primary-lighter);
+	background-color: var(--c-bg-1);
 	flex-direction: column;
 `;
+
+export const SettingsButton = styled(Button)`
+	background-color: transparent;
+	border: none;
+	padding: 0.5rem;
+`;
+
+export const ThemeButton = styled(Button)`
+	background-color: transparent;
+	border: none;
+	padding: 0.5rem;
+`;
+

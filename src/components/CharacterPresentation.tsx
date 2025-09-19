@@ -11,7 +11,7 @@ export const CharacterPresentation = ({ character }: CharacterPresentationProps)
 		<>
 				<CharacterListItem>
 					<h3>{character.name}</h3>
-					<DivRow>
+					<DivRow className="vis">
 						<Div>{character.race}</Div>
 						<Div>{character.class}</Div>
 						<Div>{character.level}</Div>

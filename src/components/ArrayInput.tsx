@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { InputText } from "./styled/Inputs";
 import { Button } from "./styled/Buttons";
+import { FormSection } from "./styled/Wrappers";
+import { FormLi, FormUl, ListButton } from "./styled/Lists";
 
 // Union av alla array-fält i Character
 export type ArrayFields =
@@ -45,8 +47,8 @@ export const ArrayInput = <T,>({
 	};
 
 	return (
-		<div>
-			<h4>{label}</h4>
+		<FormSection>
+			<h2>{label}</h2>
 			{isObject ? (
 				<>
 					<InputText
@@ -72,22 +74,25 @@ export const ArrayInput = <T,>({
 			</Button>
 
 			{/* Lista redan tillagda element */}
-			<ul>
-				{value.map((v, i) => (
-					<li key={i}>
-						{isObject
-							? `${(v as { name: string; description: string }).name}: ${
-									(v as { name: string; description: string }).description
-							  }`
-							: (v as React.ReactNode)}
-						{removeFromArray && (
-							<Button type="button" onClick={() => removeFromArray(field, i)}>
-								×
-							</Button>
-						)}
-					</li>
-				))}
-			</ul>
-		</div>
+
+			{value.length > 0 && (
+				<FormUl>
+					{value.map((v, i) => (
+						<FormLi key={i}>
+							{isObject
+								? `${(v as { name: string; description: string }).name}: ${
+										(v as { name: string; description: string }).description
+								  }`
+								: (v as React.ReactNode)}
+							{removeFromArray && (
+								<ListButton type="button" onClick={() => removeFromArray(field, i)}>
+									<span className="material-symbols-outlined">close</span>
+								</ListButton>
+							)}
+						</FormLi>
+					))}
+				</FormUl>
+			)}
+		</FormSection>
 	);
 };

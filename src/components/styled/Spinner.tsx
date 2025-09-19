@@ -13,7 +13,7 @@ export const Spinner = styled.div`
 	width: 44px;
 	height: 44px;
 	border-radius: 50%;
-	border: 5px solid var(--c-primary-darker);
-	border-left: 5px solid var(--c-primary-light);
+	border: 5px solid var(--c-trans-1);
+	border-left: 5px solid var(--c-text-1);
 	animation: ${spin} 1s linear infinite;
 `;

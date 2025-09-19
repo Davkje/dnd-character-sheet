@@ -1,45 +1,45 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-	color: var(--c-primary-darker);
-	background-color: var(--c-primary-lighter);
-	border: solid 3px var(--c-primary-darker);
-	accent-color: var(--c-primary-light);
-	border-radius: 0.25rem;
-  font-size: inherit;
-	font-family: inherit;	
-	padding: 0.25rem;
+	color: var(--c-text-1);
+	background-color: var(--c-bg-1);
+	border: solid 2px var(--c-div);
+	accent-color: var(--c-text-1);
+	border-radius: 0.5rem;
+	font-size: inherit;
+	font-family: inherit;
+	padding: 0.5rem;
 
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 
 	&::placeholder {
-		color: rgba(0, 0, 0, 0.41);
+		color: var(--c-div);
 	}
 `;
 
 export const Select = styled.select`
-	color: var(--c-primary-darker);
-	background-color: var(--c-primary-lighter);
-	border: solid 3px var(--c-primary-darker);
-	accent-color: var(--c-primary-light);
-	border-radius: 0.25rem;
-  font-size: inherit;
-	font-family: inherit;	
-	padding: 0.25rem;
+	color: var(--c-text-1);
+	background-color: var(--c-bg-1);
+	border: solid 2px var(--c-div);
+	accent-color: var(--c-text-1);
+	border-radius: 0.5rem;
+	font-size: inherit;
+	font-family: inherit;
+	padding: 0.5rem;
 
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 
 	&::placeholder {
-		color: rgba(0, 0, 0, 0.41);
+		color: var(--c-trans-1);
 	}
 `;
 
 export const InputText = styled(Input).attrs({
-  type: "text",
+	type: "text",
 })`
-  text-transform: uppercase;
+	/* text-transform: uppercase; */
 `;

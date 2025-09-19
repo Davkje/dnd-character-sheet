@@ -3,6 +3,7 @@ import { Button } from "../components/styled/Buttons";
 import { Input, Select } from "../components/styled/Inputs";
 import { ArrayInput, type ArrayFields } from "../components/ArrayInput";
 import type { Character, Item, Feature, Spell } from "../models/Character";
+import { CreateForm, FormSection } from "../components/styled/Wrappers";
 
 export const CreatePage = () => {
 	const [formData, setFormData] = useState<Character>({
@@ -96,163 +97,167 @@ export const CreatePage = () => {
 		<>
 			<h1>Create New Character</h1>
 			<h3>Fill in this form to make a new character</h3>
-			<form onSubmit={createNewCharacter}>
-				<h2>Basic Info</h2>
-				<label>
-					Name
-					<Input
-						name="name"
-						placeholder="Name"
-						value={formData.name}
-						onChange={handleChange}
-						required
-					/>
-				</label>
-				<label>
-					Class
-					<Input
-						name="class"
-						placeholder="Class"
-						value={formData.class}
-						onChange={handleChange}
-						required
-					/>
-				</label>
-				<label>
-					Race
-					<Input
-						name="race"
-						placeholder="Race"
-						value={formData.race}
-						onChange={handleChange}
-						required
-					/>
-				</label>
-				<label>
-					Level
-					<Input
-						name="level"
-						type="number"
-						placeholder="Level"
-						value={formData.level}
-						onChange={handleChange}
-						required
-						min="1"
-						max="20"
-					/>
-				</label>
-
-				<h2>Combat Stats</h2>
-				<label>
-					HP
-					<Input
-						name="hp"
-						type="number"
-						placeholder="HP"
-						value={formData.hp}
-						onChange={handleChange}
-						required
-						min="1"
-					/>
-				</label>
-				<label>
-					Armour Class
-					<Input
-						name="armourClass"
-						type="number"
-						placeholder="Armour Class"
-						value={formData.armourClass}
-						onChange={handleChange}
-						required
-						min="1"
-					/>
-				</label>
-				<label>
-					Speed
-					<Input
-						name="speed"
-						type="number"
-						placeholder="Speed"
-						value={formData.speed}
-						onChange={handleChange}
-						required
-						min="1"
-					/>
-				</label>
-				<label>
-					Hit Die
-					<Input
-						name="hitDie"
-						placeholder="Hit Die (e.g. d6)"
-						value={formData.hitDie}
-						onChange={handleChange}
-					/>
-				</label>
-
-				<h2>Abilities</h2>
-				{Object.keys(formData.abilities).map((ability) => (
-					<label key={ability}>
-						{ability.charAt(0).toUpperCase() + ability.slice(1)}
+			<CreateForm onSubmit={createNewCharacter}>
+				<FormSection>
+					<h2>Basic Info</h2>
+					<label>
+						Name
 						<Input
-							name={ability}
-							type="number"
-							value={formData.abilities[ability as keyof typeof formData.abilities]}
-							onChange={handleAbilityChange}
-							min="1"
-							max="30"
+							name="name"
+							placeholder="Name"
+							value={formData.name}
+							onChange={handleChange}
+							required
 						/>
 					</label>
-				))}
+					<label>
+						Class
+						<Input
+							name="class"
+							placeholder="Class"
+							value={formData.class}
+							onChange={handleChange}
+							required
+						/>
+					</label>
+					<label>
+						Race
+						<Input
+							name="race"
+							placeholder="Race"
+							value={formData.race}
+							onChange={handleChange}
+							required
+						/>
+					</label>
+					<label>
+						Level
+						<Input
+							name="level"
+							type="number"
+							placeholder="Level"
+							value={formData.level}
+							onChange={handleChange}
+							required
+							min="1"
+							max="20"
+						/>
+					</label>
+					<label>
+						Proficiency Bonus
+						<Input
+							name="proficiencyBonus"
+							type="number"
+							placeholder="Proficiency Bonus"
+							value={formData.proficiencyBonus}
+							onChange={handleChange}
+							min="2"
+							max="6"
+						/>
+					</label>
+				</FormSection>
+				<FormSection>
+					<h2>Combat Stats</h2>
+					<label>
+						HP
+						<Input
+							name="hp"
+							type="number"
+							placeholder="HP"
+							value={formData.hp}
+							onChange={handleChange}
+							required
+							min="1"
+						/>
+					</label>
+					<label>
+						Armour Class
+						<Input
+							name="armourClass"
+							type="number"
+							placeholder="Armour Class"
+							value={formData.armourClass}
+							onChange={handleChange}
+							required
+							min="1"
+						/>
+					</label>
+					<label>
+						Speed
+						<Input
+							name="speed"
+							type="number"
+							placeholder="Speed"
+							value={formData.speed}
+							onChange={handleChange}
+							required
+							min="1"
+						/>
+					</label>
+					<label>
+						Hit Die
+						<Input
+							name="hitDie"
+							placeholder="Hit Die (e.g. d6)"
+							value={formData.hitDie}
+							onChange={handleChange}
+						/>
+					</label>
+				</FormSection>
+				<FormSection>
+					<h2>Abilities</h2>
+					{Object.keys(formData.abilities).map((ability) => (
+						<label key={ability}>
+							{ability.charAt(0).toUpperCase() + ability.slice(1)}
+							<Input
+								name={ability}
+								type="number"
+								value={
+									formData.abilities[ability as keyof typeof formData.abilities]
+								}
+								onChange={handleAbilityChange}
+								min="1"
+								max="30"
+							/>
+						</label>
+					))}
+				</FormSection>
+				<FormSection>
+					<h2>Primary Abilities</h2>
+					<label>
+						Melee
+						<Select
+							name="primaryWeaponAbility"
+							value={formData.primaryWeaponAbility}
+							onChange={handleChange}
+						>
+							<option value=""></option>
+							<option value="strength">Strength</option>
+							<option value="dexterity">Dexterity</option>
+							<option value="<constitution">Constitution</option>
+							<option value="<intelligence">Intelligence</option>
+							<option value="<wisdom">Wisdom</option>
+							<option value="<charisma">Charisma</option>
+						</Select>
+					</label>
+					<label>
+						Spell
+						<Select
+							name="primarySpellAbility"
+							value={formData.primarySpellAbility}
+							onChange={handleChange}
+						>
+							<option value=""></option>
+							<option value="strength">Strength</option>
+							<option value="dexterity">Dexterity</option>
+							<option value="<constitution">Constitution</option>
+							<option value="<intelligence">Intelligence</option>
+							<option value="<wisdom">Wisdom</option>
+							<option value="<charisma">Charisma</option>
+						</Select>
+					</label>
+				</FormSection>
 
-				<h2>Primary Abilities</h2>
-				<label>
-					Melee
-					<Select
-						name="primaryWeaponAbility"
-						value={formData.primaryWeaponAbility}
-						onChange={handleChange}
-					>
-						<option value=""></option>
-						<option value="strength">Strength</option>
-						<option value="dexterity">Dexterity</option>
-						<option value="<constitution">Constitution</option>
-						<option value="<intelligence">Intelligence</option>
-						<option value="<wisdom">Wisdom</option>
-						<option value="<charisma">Charisma</option>
-					</Select>
-				</label>
-				<label>
-					Spell
-					<Select
-						name="primarySpellAbility"
-						value={formData.primarySpellAbility}
-						onChange={handleChange}
-					>
-						<option value=""></option>
-						<option value="strength">Strength</option>
-						<option value="dexterity">Dexterity</option>
-						<option value="<constitution">Constitution</option>
-						<option value="<intelligence">Intelligence</option>
-						<option value="<wisdom">Wisdom</option>
-						<option value="<charisma">Charisma</option>
-					</Select>
-				</label>
-
-				<h2>Proficiency</h2>
-				<label>
-					Proficiency Bonus
-					<Input
-						name="proficiencyBonus"
-						type="number"
-						placeholder="Proficiency Bonus"
-						value={formData.proficiencyBonus}
-						onChange={handleChange}
-						min="2"
-						max="6"
-					/>
-				</label>
-
-				<h3>Arrays</h3>
 				<ArrayInput<string>
 					label="Proficient Skills"
 					field="proficientSkills"
@@ -260,6 +265,7 @@ export const CreatePage = () => {
 					addToArray={addToArray}
 					removeFromArray={removeFromArray}
 				/>
+
 				<ArrayInput<string>
 					label="Proficient Saving Throws"
 					field="proficientSavingThrows"
@@ -267,6 +273,7 @@ export const CreatePage = () => {
 					value={formData.proficientSavingThrows}
 					removeFromArray={removeFromArray}
 				/>
+
 				<ArrayInput<Item>
 					label="Items"
 					field="items"
@@ -293,7 +300,7 @@ export const CreatePage = () => {
 				/>
 
 				<Button type="submit">Create</Button>
-			</form>
+			</CreateForm>
 		</>
 	);
 };

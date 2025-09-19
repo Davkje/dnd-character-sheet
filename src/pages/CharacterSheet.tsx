@@ -10,6 +10,7 @@ import {
 	PageWrapperGrid,
 	SkillContainer,
 	SkillsWrapper,
+	TopSection,
 	Wrapper,
 } from "../components/styled/Wrappers";
 import {
@@ -21,7 +22,7 @@ import {
 } from "../utils/calculations";
 import { Loader } from "../components/Loader";
 import { Checked, UnChecked } from "../components/styled/Icons";
-import { AbilityButton, Button } from "../components/styled/Buttons";
+import { AbilityButton, SettingsButton } from "../components/styled/Buttons";
 import { AbilityModal } from "../components/AbilityModal";
 import type { AbilityScores } from "../models/Character";
 import { CharacterSettings } from "../components/CharacterSettings";
@@ -54,17 +55,17 @@ export const CharacterSheet = () => {
 
 		return (
 			<>
-				<DivRow>
+				<TopSection>
 					<Link to={"/characters"}>Back</Link>
 					<h1>{character.name}</h1>
-					<Button
+					<SettingsButton
 						onClick={() => {
 							setSettingsOpened(true);
 						}}
 					>
 						<span className="material-symbols-outlined">settings</span>
-					</Button>
-				</DivRow>
+					</SettingsButton>
+				</TopSection>
 				<PageWrapperGrid>
 					<Wrapper>
 						<h3>{selectedPrimaryAbility === "spell" ? "Spell" : "Weapon"} Ability</h3>
