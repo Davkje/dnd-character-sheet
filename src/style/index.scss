@@ -90,15 +90,11 @@
   font-family: Kadwa, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  // color: var(--c-text-1);
-  // background-color: var(--c-bg-1);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 body {
   display: flex;
@@ -117,7 +113,7 @@ h5,
 h6,
 label {
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.5;
   color: var(--c-text-1);
   font-weight: bold;
   text-align: center;
@@ -139,15 +135,17 @@ h3 {
 }
 
 h4 {
+  // line-height: 2rem;
+  text-transform: capitalize;
+  font-weight: 500;
   font-size: clamp(1rem, 2vw, 1.2rem);
   margin-bottom: 0.25rem;
 }
 
 a {
   font-weight: 500;
-  color: var(--c-text-1);
+  color: var(--c-text-2);
   text-decoration: inherit;
-  transition: color .5s ease;
 
   &:hover {
     color: var(--c-out);
@@ -217,7 +215,21 @@ ul {
     'opsz' 24
 }
 
+// UTILITY 
+
 .vis {
   background-color: var(--c-trans-2);
-  // border: solid 2px var(--c-div);
+}
+
+.cap {
+  text-transform: capitalize;
+}
+
+
+.left {
+  text-align: left;
+}
+
+.top {
+  justify-content: flex-start;
 }

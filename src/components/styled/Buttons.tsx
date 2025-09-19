@@ -44,3 +44,15 @@ export const ThemeButton = styled(Button)`
 	padding: 0.5rem;
 `;
 
+export const ListButton = styled(Button)`
+  color: var(--c-bg-2);
+	padding: 0;
+	/* margin: 4px; */
+	background-color: transparent;
+	border: none;
+  transition: color .25s ease;
+  &:hover {
+    color: var(--c-text-1);
+    background-color: var(--c-bg-1);
+  }
+`;

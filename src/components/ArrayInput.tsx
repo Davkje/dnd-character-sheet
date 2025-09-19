@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { InputText } from "./styled/Inputs";
-import { Button } from "./styled/Buttons";
+import { Button, ListButton } from "./styled/Buttons";
 import { FormSection } from "./styled/Wrappers";
-import { FormLi, FormUl, ListButton } from "./styled/Lists";
+import { FormLi, FormUl } from "./styled/Lists";
 
 // Union av alla array-fält i Character
 export type ArrayFields =

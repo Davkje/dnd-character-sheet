@@ -89,7 +89,7 @@ export const CharacterSheet = () => {
 						<h3>{character.race}</h3>
 						<h4>{character.class}</h4>
 						<Div>Level {character.level}</Div>
-						<Div>Prof Bonus{formatMod(character.proficiencyBonus)}</Div>
+						<Div>Prof Bonus {formatMod(character.proficiencyBonus)}</Div>
 					</Wrapper>
 					<Wrapper>
 						<h3>Hp</h3>

@@ -28,6 +28,7 @@ export const Select = styled.select`
 	font-size: inherit;
 	font-family: inherit;
 	padding: 0.5rem;
+  text-transform: capitalize;
 
 	-webkit-appearance: none;
 	-moz-appearance: none;

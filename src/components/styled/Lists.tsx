@@ -1,30 +1,36 @@
 import { styled } from "styled-components";
-import { Button } from "./Buttons";
 
 export const FormUl = styled.ul`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* gap: .25rem; */
+	padding: 0.5rem;
 	border: solid 2px var(--c-div);
 	border-radius: 0.5rem;
+	gap: 1rem;
 `;
-
 export const FormLi = styled.li`
-	text-transform: capitalize;
 	width: 100%;
 	display: flex;
-	flex-direction: row;
-	flex: 1;
-	justify-content: space-between;
-	align-items: center;
-	padding-left: 0.5rem;
-`;
+	align-items: flex-start;
+  /* justify-content: center; */
+	/* border-bottom: solid 2px var(--c-trans-2); */
+	gap: 0.5rem;
+	/* padding-bottom: 0.5rem; */
 
-export const ListButton = styled(Button)`
-	padding: 0.25rem;
-	margin: 4px;
-	background-color: transparent;
-	border: none;
+	h4 {
+		display: flex;
+		align-items: flex-start;
+		text-align: left;
+		height: 100%;
+		flex: 1;
+		margin: 0;
+	}
+	p {
+		display: flex;
+		align-items: flex-start;
+		flex: 4;
+		height: 100%;
+	}
 `;

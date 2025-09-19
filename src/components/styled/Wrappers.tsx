@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 	padding: 0.5rem;
 	border-radius: 0.5rem;
 	background-color: var(--c-bg-1);
-	border: solid 2px var(--c-out);
+	border: solid 2px var(--c-div);
 `;
 
 export const WrapperRow = styled(Wrapper)`
@@ -76,13 +76,16 @@ export const DivSmall = styled.div`
 // --- CHARACTER LIST ---
 
 export const CharacterList = styled(Wrapper)`
-  background-color: var(--c-bg-2);
+  /* background-color: var(--c-bg-1); */
+  border: none;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 `;
 
 export const CharacterListItem = styled(Wrapper)`
   grid-column: span 6;
+  background-color: var(--c-bg-2);
+  
 
   @media screen and (min-width: 600px) {
     grid-column: span 3;
@@ -101,6 +104,7 @@ export const CreateForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const FormSection = styled.div`
@@ -110,7 +114,6 @@ export const FormSection = styled.div`
   /* justify-content: center; */
   /* background-color: #ff000023; */
 `;
-
 
 // --- IMAGE ---
 export const ImageWrapper = styled(Wrapper)`

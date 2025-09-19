@@ -1,9 +1,13 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Button } from "../components/styled/Buttons";
 import { Input, Select } from "../components/styled/Inputs";
-import { ArrayInput, type ArrayFields } from "../components/ArrayInput";
-import type { Character, Item, Feature, Spell } from "../models/Character";
+import type { ArrayFields } from "../components/ArrayInput";
+import type { Character } from "../models/Character";
 import { CreateForm, FormSection } from "../components/styled/Wrappers";
+import { SelectArrayInput } from "../components/SelectArrayInput";
+import { ALL_SKILLS } from "../models/Skills";
+import { ALL_SAVING_THROWS } from "../models/Abilities";
+import { ObjectArrayInput } from "../components/ObjectArrayInput";
 
 export const CreatePage = () => {
 	const [formData, setFormData] = useState<Character>({
@@ -39,11 +43,11 @@ export const CreatePage = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleAbilityChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleAbilityChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({
 			...prev,
-			abilities: { ...prev.abilities, [name]: Number(value) },
+			abilities: { ...prev.abilities, [name]: parseInt(value, 10) },
 		}));
 	};
 
@@ -96,7 +100,6 @@ export const CreatePage = () => {
 	return (
 		<>
 			<h1>Create New Character</h1>
-			<h3>Fill in this form to make a new character</h3>
 			<CreateForm onSubmit={createNewCharacter}>
 				<FormSection>
 					<h2>Basic Info</h2>
@@ -132,28 +135,46 @@ export const CreatePage = () => {
 					</label>
 					<label>
 						Level
-						<Input
+						<Select
 							name="level"
-							type="number"
-							placeholder="Level"
 							value={formData.level}
-							onChange={handleChange}
-							required
-							min="1"
-							max="20"
-						/>
+							onChange={(e) =>
+								setFormData((prev) => ({
+									...prev,
+									level: parseInt(e.target.value, 10),
+								}))
+							}
+						>
+							{Array.from({ length: 20 }, (_, i) => i + 1)
+								.reverse()
+								.map((num) => (
+									<option key={num} value={num}>
+										{num}
+									</option>
+								))}
+						</Select>
 					</label>
+
 					<label>
 						Proficiency Bonus
-						<Input
+						<Select
 							name="proficiencyBonus"
-							type="number"
-							placeholder="Proficiency Bonus"
 							value={formData.proficiencyBonus}
-							onChange={handleChange}
-							min="2"
-							max="6"
-						/>
+							onChange={(e) =>
+								setFormData((prev) => ({
+									...prev,
+									proficiencyBonus: parseInt(e.target.value, 10),
+								}))
+							}
+						>
+							{Array.from({ length: 5 }, (_, i) => i + 2)
+								.reverse()
+								.map((num) => (
+									<option key={num} value={num}>
+										{num}
+									</option>
+								))}
+						</Select>
 					</label>
 				</FormSection>
 				<FormSection>
@@ -209,16 +230,21 @@ export const CreatePage = () => {
 					{Object.keys(formData.abilities).map((ability) => (
 						<label key={ability}>
 							{ability.charAt(0).toUpperCase() + ability.slice(1)}
-							<Input
+							<Select
 								name={ability}
-								type="number"
 								value={
 									formData.abilities[ability as keyof typeof formData.abilities]
 								}
 								onChange={handleAbilityChange}
-								min="1"
-								max="30"
-							/>
+							>
+								{Array.from({ length: 20 }, (_, i) => i + 1)
+									.reverse()
+									.map((num) => (
+										<option key={num} value={num}>
+											{num}
+										</option>
+									))}
+							</Select>
 						</label>
 					))}
 				</FormSection>
@@ -234,10 +260,10 @@ export const CreatePage = () => {
 							<option value=""></option>
 							<option value="strength">Strength</option>
 							<option value="dexterity">Dexterity</option>
-							<option value="<constitution">Constitution</option>
-							<option value="<intelligence">Intelligence</option>
-							<option value="<wisdom">Wisdom</option>
-							<option value="<charisma">Charisma</option>
+							<option value="constitution">Constitution</option>
+							<option value="intelligence">Intelligence</option>
+							<option value="wisdom">Wisdom</option>
+							<option value="charisma">Charisma</option>
 						</Select>
 					</label>
 					<label>
@@ -250,53 +276,49 @@ export const CreatePage = () => {
 							<option value=""></option>
 							<option value="strength">Strength</option>
 							<option value="dexterity">Dexterity</option>
-							<option value="<constitution">Constitution</option>
-							<option value="<intelligence">Intelligence</option>
-							<option value="<wisdom">Wisdom</option>
-							<option value="<charisma">Charisma</option>
+							<option value="constitution">Constitution</option>
+							<option value="intelligence">Intelligence</option>
+							<option value="wisdom">Wisdom</option>
+							<option value="charisma">Charisma</option>
 						</Select>
 					</label>
 				</FormSection>
 
-				<ArrayInput<string>
+				<SelectArrayInput
 					label="Proficient Skills"
-					field="proficientSkills"
 					value={formData.proficientSkills}
-					addToArray={addToArray}
-					removeFromArray={removeFromArray}
+					options={ALL_SKILLS.map((s) => ({ name: s.name, label: s.name }))}
+					addToArray={(val) => addToArray("proficientSkills", val)}
+					removeFromArray={(i) => removeFromArray("proficientSkills", i)}
 				/>
 
-				<ArrayInput<string>
+				<SelectArrayInput
 					label="Proficient Saving Throws"
-					field="proficientSavingThrows"
-					addToArray={addToArray}
 					value={formData.proficientSavingThrows}
-					removeFromArray={removeFromArray}
+					options={ALL_SAVING_THROWS}
+					addToArray={(val) => addToArray("proficientSavingThrows", val)}
+					removeFromArray={(i) => removeFromArray("proficientSavingThrows", i)}
 				/>
 
-				<ArrayInput<Item>
+				<ObjectArrayInput
 					label="Items"
-					field="items"
-					addToArray={addToArray}
-					isObject
 					value={formData.items}
-					removeFromArray={removeFromArray}
+					addToArray={(val) => addToArray("items", val)}
+					removeFromArray={(i) => removeFromArray("items", i)}
 				/>
-				<ArrayInput<Feature>
+
+				<ObjectArrayInput
 					label="Features"
-					field="features"
-					addToArray={addToArray}
-					isObject
 					value={formData.features}
-					removeFromArray={removeFromArray}
+					addToArray={(val) => addToArray("features", val)}
+					removeFromArray={(i) => removeFromArray("features", i)}
 				/>
-				<ArrayInput<Spell>
+
+				<ObjectArrayInput
 					label="Spells"
-					field="spells"
-					addToArray={addToArray}
-					isObject
 					value={formData.spells}
-					removeFromArray={removeFromArray}
+					addToArray={(val) => addToArray("spells", val)}
+					removeFromArray={(i) => removeFromArray("spells", i)}
 				/>
 
 				<Button type="submit">Create</Button>
